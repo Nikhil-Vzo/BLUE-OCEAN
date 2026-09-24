@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Blue Ocean Startup Empire • 500 Research Papers & 53 Sovereign Ventures</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN with custom config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            luma: {
+              50: '#FBFBFC',
+              100: '#F4F4F6',
+              200: '#E6E6EB',
+              300: '#D2D2DC',
+              400: '#9E9EB0',
+              500: '#6E6E82',
+              600: '#48485B',
+              700: '#2E2E3E',
+              800: '#1C1C28',
+              900: '#0F0F17',
+            }
+          },
+          boxShadow: {
+            'luma-sm': '0 2px 8px -1px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02)',
+            'luma': '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02)',
+            'luma-lg': '0 12px 36px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03)',
+            'luma-glow': '0 0 25px -5px rgba(124, 58, 237, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons & Marked.js for markdown rendering -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    /* Viewport & Root Overflow Protection */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 10% 0%, rgba(238, 242, 255, 0.7) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 12%, rgba(255, 241, 242, 0.7) 0%, transparent 45%),
+                  #FAFAFC;
+      color: #18181B;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
+      position: relative;
+    }
+    
+    /* Subtle Glassmorphism */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(228, 228, 231, 0.85);
+    }
+    
+    .glass-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(228, 228, 231, 0.85);
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(212, 212, 216, 1);
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    .shiny-btn {
+      background: linear-gradient(180deg, #18181B 0%, #09090B 100%);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+      transition: all 0.15s ease;
+    }
+    .shiny-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Custom Scrollbar for horizontal filter chips */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Mobile drawer slide animation & off-screen boundary isolation */
+    #mobile-drawer {
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+    }
+    #mobile-drawer.drawer-open {
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transform: translateX(0) !important;
+    }
+    
+    /* Markdown prose styling with comfortable reading spacing & overflow safety */
+    .prose-luma {
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .prose-luma h1 { font-size: 1.6rem; font-weight: 800; margin-top: 1.75rem; margin-bottom: 1rem; letter-spacing: -0.025em; color: #09090B; }
+    .prose-luma h2 { font-size: 1.35rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.02em; color: #18181B; border-bottom: 1px solid #E4E4E7; padding-bottom: 0.35rem; }
+    .prose-luma h3 { font-size: 1.15rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #27272A; }
+    .prose-luma p { margin-top: 0.65rem; margin-bottom: 1rem; line-height: 1.75; font-size: 0.95rem; color: #3F3F46; }
+    .prose-luma ul { list-style-type: disc; padding-left: 1.5rem; margin-top: 0.65rem; margin-bottom: 1rem; color: #3F3F46; }
+    .prose-luma li { margin-bottom: 0.45rem; line-height: 1.65; }
+    .prose-luma code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background-color: #F4F4F5; padding: 0.2rem 0.45rem; border-radius: 0.4rem; border: 1px solid #E4E4E7; color: #09090B; word-break: break-word; overflow-wrap: break-word; }
+    .prose-luma pre { background-color: #09090B; color: #F4F4F5; padding: 1.25rem; border-radius: 0.875rem; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; margin: 1.25rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; line-height: 1.6; }
+    .prose-luma pre code { background-color: transparent; border: none; padding: 0; color: inherit; white-space: pre; word-break: normal; overflow-wrap: normal; }
+    .prose-luma table { display: block; width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+    .prose-luma th { background-color: #F4F4F5; text-align: left; padding: 0.75rem 1rem; border: 1px solid #E4E4E7; font-weight: 600; white-space: nowrap; }
+    .prose-luma td { padding: 0.75rem 1rem; border: 1px solid #E4E4E7; color: #3F3F46; }
+    .prose-luma blockquote { border-left: 3px solid #7928CA; padding-left: 1.25rem; margin: 1rem 0; font-style: italic; color: #52525B; background: #FAF5FF; padding: 0.75rem 1.25rem; border-radius: 0 0.75rem 0.75rem 0; }
+  </style>
+</head>
+<body class="min-h-screen text-zinc-900 antialiased flex flex-col">
+
+  <!-- Embedded Complete Repository Bundle -->
+  <script id="repo-data" type="application/json">
+__SAFE_BUNDLE_JSON__
+  </script>
+
+  <!-- ========================================================= -->
+  <!-- 1. STICKY LUMA HEADER (UNIFIED, SHINY & RESPONSIVE)       -->
+  <!-- ========================================================= -->
+  <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-zinc-200/70 shadow-sm transition-all duration-200 w-full max-w-full overflow-x-clip">
+    <!-- Primary Top Bar -->
+    <div class="max-w-7xl mx-auto h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-6 min-w-0">
+      
+      <!-- Left: Hamburger Button, Brand & Breadcrumb Capsule -->
+      <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+        <button id="hamburger-btn" aria-label="Open Navigation Menu" class="p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100/80 rounded-xl transition flex items-center justify-center focus:outline-none">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        
+        <a href="#overview" onclick="navTo('overview')" class="flex items-center gap-2.5 group">
+          <!-- Luma Luminous Logo Icon -->
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-amber-400 p-[1px] shadow-sm shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-200">
+            <div class="w-full h-full bg-white/95 rounded-[15px] flex items-center justify-center backdrop-blur-sm">
+              <span class="text-sm font-bold bg-gradient-to-tr from-violet-600 to-amber-500 bg-clip-text text-transparent">⚡</span>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base tracking-tight text-zinc-950 group-hover:text-black">Blue Ocean</span>
+              <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/70">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                500 Papers
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Breadcrumb Capsule -->
+        <nav id="breadcrumb-bar" aria-label="Breadcrumb" class="hidden 2xl:flex items-center text-xs text-zinc-400 pl-3.5 ml-1 border-l border-zinc-200/80 whitespace-nowrap">
+          <button onclick="navTo('overview')" class="text-zinc-500 hover:text-zinc-900 font-medium transition flex items-center gap-1">
+            <i data-lucide="compass" class="w-3.5 h-3.5 text-zinc-400"></i>
+            <span>Empire</span>
+          </button>
+          <span class="mx-1.5 text-zinc-300">/</span>
+          <span id="bc-section" class="font-semibold text-zinc-800">Executive Synthesis</span>
+          <span id="bc-sub-wrapper" class="hidden items-center">
+            <span class="mx-1.5 text-zinc-300">/</span>
+            <span id="bc-subsection" class="text-zinc-600 font-medium max-w-[180px] truncate">Item</span>
+          </span>
+        </nav>
+      </div>
+
+      <!-- Center: Desktop Integrated Segmented Pill Navigation -->
+      <nav class="hidden xl:flex items-center bg-zinc-100/90 p-1 rounded-2xl border border-zinc-200/70 shadow-inner flex-shrink-0">
+        <button onclick="navTo('overview')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 bg-white text-zinc-950 font-bold flex items-center gap-1.5 shadow-sm border border-zinc-200/80 text-xs" data-tab="overview">
+          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-indigo-500"></i> Overview
+        </button>
+        <button onclick="navTo('phonon')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs" data-tab="phonon">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i> Phonon
+        </button>
+        <button onclick="navTo('council')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs" data-tab="council">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-purple-500"></i> Council (53)
+        </button>
+        <button onclick="navTo('scouts')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs" data-tab="scouts">
+          <i data-lucide="file-search" class="w-3.5 h-3.5 text-blue-500"></i> 500 Papers
+        </button>
+        <button onclick="navTo('blueprints')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs" data-tab="blueprints">
+          <i data-lucide="rocket" class="w-3.5 h-3.5 text-emerald-500"></i> Blueprints
+        </button>
+        <button onclick="navTo('tweets')" class="tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs" data-tab="tweets">
+          <i data-lucide="twitter" class="w-3.5 h-3.5 text-sky-500"></i> Launch
+        </button>
+      </nav>
+
+      <!-- Right: Omni-Search Bar & Quick Action Pills -->
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+        <!-- Omni Search Trigger (Desktop & Mobile) -->
+        <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 text-xs text-zinc-500 hover:text-zinc-900 bg-zinc-100/90 hover:bg-zinc-200/80 rounded-xl transition border border-zinc-200/70 font-medium shadow-2xs group">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-700 transition"></i>
+          <span class="hidden sm:inline">Search...</span>
+          <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-white rounded border border-zinc-200 font-mono text-zinc-400 group-hover:border-zinc-300">⌘K</kbd>
+        </button>
+
+        <!-- Quick CSV Export Button -->
+        <button onclick="downloadPapersCSV()" title="Export 500 Papers (CSV)" class="hidden md:flex p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-xl transition">
+          <i data-lucide="download" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Quick Share Button -->
+        <button onclick="copyCurrentShareLink()" title="Share Link" class="p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-xl transition">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile / Tablet Responsive Segmented Tab Bar (Visible on < xl screens) -->
+    <div class="xl:hidden border-t border-zinc-200/60 bg-white/70 backdrop-blur-md px-3 py-1.5 overflow-x-auto no-scrollbar flex items-center gap-1.5 text-xs font-semibold w-full max-w-full">
+      <button onclick="navTo('overview')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 bg-white text-zinc-950 font-bold flex items-center gap-1.5 shadow-sm border border-zinc-200/80 whitespace-nowrap" data-tab="overview">
+        <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-indigo-500"></i> Overview
+      </button>
+      <button onclick="navTo('phonon')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 whitespace-nowrap" data-tab="phonon">
+        <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i> Phonon
+      </button>
+      <button onclick="navTo('council')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 whitespace-nowrap" data-tab="council">
+        <i data-lucide="users" class="w-3.5 h-3.5 text-purple-500"></i> Council (53)
+      </button>
+      <button onclick="navTo('scouts')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 whitespace-nowrap" data-tab="scouts">
+        <i data-lucide="file-search" class="w-3.5 h-3.5 text-blue-500"></i> 500 Papers
+      </button>
+      <button onclick="navTo('blueprints')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 whitespace-nowrap" data-tab="blueprints">
+        <i data-lucide="rocket" class="w-3.5 h-3.5 text-emerald-500"></i> Blueprints
+      </button>
+      <button onclick="navTo('tweets')" class="tab-btn px-3 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 whitespace-nowrap" data-tab="tweets">
+        <i data-lucide="twitter" class="w-3.5 h-3.5 text-sky-500"></i> Launch
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- 2. MOBILE SLIDE-OUT NAVIGATION DRAWER                     -->
+  <!-- ========================================================= -->
+  <div id="drawer-backdrop" onclick="closeDrawer()" class="fixed inset-0 z-50 bg-zinc-900/30 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <aside id="mobile-drawer" class="fixed top-0 left-0 bottom-0 z-50 w-72 sm:w-80 max-w-[85vw] bg-white border-r border-zinc-200 shadow-2xl -translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-4 sm:p-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/70">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-amber-400 p-[1px] shadow-sm shadow-indigo-500/20">
+          <div class="w-full h-full bg-white/95 rounded-[15px] flex items-center justify-center">
+            <span class="text-sm font-bold bg-gradient-to-tr from-violet-600 to-amber-500 bg-clip-text text-transparent">⚡</span>
+          </div>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-sm tracking-tight text-zinc-950">Blue Ocean Empire</h2>
+          <p class="text-[11px] text-zinc-500 font-medium">First-Principles Deep-Tech</p>
+        </div>
+      </div>
+      <button onclick="closeDrawer()" aria-label="Close drawer" class="p-2 text-zinc-400 hover:text-zinc-800 hover:bg-zinc-200/60 rounded-xl transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Quick Stats Pill -->
+    <div class="p-3 mx-3 my-2 rounded-xl bg-zinc-50 border border-zinc-100 flex items-center justify-between text-center text-xs">
+      <div>
+        <p class="text-xs font-bold text-zinc-900">500</p>
+        <p class="text-[10px] text-zinc-400">Papers</p>
+      </div>
+      <div class="h-6 w-px bg-zinc-200"></div>
+      <div>
+        <p class="text-xs font-bold text-zinc-900">53</p>
+        <p class="text-[10px] text-zinc-400">Startups</p>
+      </div>
+      <div class="h-6 w-px bg-zinc-200"></div>
+      <div>
+        <p class="text-xs font-bold text-emerald-600">$42.6B</p>
+        <p class="text-[10px] text-zinc-400">TAM</p>
+      </div>
+    </div>
+
+    <!-- Drawer Navigation Links -->
+    <div class="flex-1 overflow-y-auto px-3 py-2 space-y-1 text-sm font-medium">
+      <div class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider px-3 py-1">Main Sections</div>
+      
+      <button onclick="navTo('overview'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="overview">
+        <span class="flex items-center gap-2.5"><i data-lucide="layout-dashboard" class="w-4 h-4 text-indigo-500"></i> Executive Synthesis</span>
+        <span class="text-[10px] font-semibold bg-zinc-100 text-zinc-500 px-1.5 py-0.5 rounded-full">Root</span>
+      </button>
+
+      <button onclick="navTo('phonon'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="phonon">
+        <span class="flex items-center gap-2.5"><i data-lucide="zap" class="w-4 h-4 text-amber-500"></i> Phonon Dynamics</span>
+        <span class="text-[10px] font-semibold bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded-full border border-amber-200/60">Sovereign</span>
+      </button>
+
+      <button onclick="navTo('council'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="council">
+        <span class="flex items-center gap-2.5"><i data-lucide="users" class="w-4 h-4 text-purple-500"></i> 100-Persona Council</span>
+        <span class="text-[10px] font-semibold bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded-full border border-purple-200/60">53 Startups</span>
+      </button>
+
+      <button onclick="navTo('scouts'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="scouts">
+        <span class="flex items-center gap-2.5"><i data-lucide="file-search" class="w-4 h-4 text-blue-500"></i> 500 Research Scouts</span>
+        <span class="text-[10px] font-semibold bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded-full border border-blue-200/60">10 Teams</span>
+      </button>
+
+      <button onclick="navTo('blueprints'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="blueprints">
+        <span class="flex items-center gap-2.5"><i data-lucide="rocket" class="w-4 h-4 text-emerald-500"></i> Venture Blueprints</span>
+        <span class="text-[10px] font-semibold bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded-full border border-emerald-200/60">Top 15</span>
+      </button>
+
+      <button onclick="navTo('tweets'); closeDrawer()" class="drawer-link w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition text-left" data-target="tweets">
+        <span class="flex items-center gap-2.5"><i data-lucide="twitter" class="w-4 h-4 text-sky-500"></i> Launch Tweets</span>
+        <span class="text-[10px] font-semibold bg-sky-50 text-sky-700 px-1.5 py-0.5 rounded-full border border-sky-200/60">Day 1</span>
+      </button>
+
+      <div class="pt-3 pb-1 text-[11px] font-bold text-zinc-400 uppercase tracking-wider px-3">10 Scout Domains</div>
+      <div id="drawer-domain-list" class="space-y-0.5 text-xs">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-3 border-t border-zinc-100 text-center text-[11px] text-zinc-400 bg-zinc-50">
+      <span class="inline-flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 100% Offline • Standalone App
+      </span>
+    </div>
+  </aside>
+
+
+
+  <!-- ========================================================= -->
+  <!-- 4. MAIN CONTENT CONTAINER (SWITCHABLE VIEWS)              -->
+  <!-- ========================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-36 space-y-10 sm:space-y-16 min-w-0 overflow-x-hidden">
+
+    <!-- VIEW 1: EXECUTIVE SYNTHESIS & DISCOVERY OVERVIEW -->
+    <section id="view-overview" class="view-panel space-y-8 sm:space-y-10 min-w-0">
+      <!-- Hero Banner (Luma Style) -->
+      <div class="relative overflow-hidden rounded-[28px] p-6 sm:p-10 lg:p-14 border border-zinc-200/80 bg-white shadow-luma min-w-0" style="contain: paint;">
+        <div class="absolute -top-16 right-0 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-gradient-to-br from-purple-200/40 via-rose-100/30 to-amber-200/30 blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-4xl min-w-0">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide bg-gradient-to-r from-purple-50 to-rose-50 text-purple-800 border border-purple-200/60 mb-5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
+            First-Principles Deep-Tech Discovery
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-[1.15] break-words">
+            Blue Ocean Research Paper Startup Empire
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-zinc-600 leading-relaxed font-normal">
+            Synthesis of <strong class="text-zinc-900 font-semibold">500 radically unique research papers</strong> across 10 cutting-edge frontiers, the <strong class="text-zinc-900 font-semibold">100-Persona Council</strong> creation of <strong class="text-zinc-900 font-semibold">53 sovereign startups</strong>, and the breakthrough physical invention: <strong class="text-zinc-900 font-semibold">Phonon Dynamics (The Acoustic Negawatt)</strong>.
+          </p>
+
+          <!-- Action buttons -->
+          <div class="mt-8 flex flex-wrap gap-2.5 sm:gap-4">
+            <button onclick="navTo('phonon')" class="shiny-btn px-4 sm:px-5 py-2.5 rounded-xl text-white font-semibold text-xs sm:text-sm flex items-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Explore Phonon Dynamics
+            </button>
+            <button onclick="navTo('scouts')" class="px-4 sm:px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-800 font-semibold text-xs sm:text-sm border border-zinc-200/90 shadow-sm flex items-center gap-2 transition">
+              <i data-lucide="search" class="w-4 h-4 text-zinc-500"></i> Search 500 Papers
+            </button>
+            <button onclick="navTo('council')" class="px-4 sm:px-5 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-100/70 text-purple-900 font-semibold text-xs sm:text-sm border border-purple-200/70 shadow-sm flex items-center gap-2 transition">
+              <i data-lucide="users" class="w-4 h-4 text-purple-600"></i> 53 Council Startups
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Discovery Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5 min-w-0" id="kpi-grid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Dual Criterion Gate Card -->
+      <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white min-w-0 overflow-hidden">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 flex-shrink-0">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-base sm:text-lg text-zinc-950">Dual-Criterion Filtration Gate</h3>
+            <p class="text-xs text-zinc-500">The non-negotiable hurdles required before any paper was cataloged</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm">
+          <div class="p-4 sm:p-5 rounded-2xl bg-zinc-50/90 border border-zinc-200/70 min-w-0 break-words">
+            <span class="font-bold text-zinc-950 block text-sm mb-1.5 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-600 flex-shrink-0"></span> 1. Radical Uniqueness (Blue Ocean)
+            </span>
+            <span class="text-zinc-600 leading-relaxed text-xs sm:text-sm">Solves an unaddressed bottleneck with zero direct incumbent competition, zero patent encroachment, and immunity to shallow LLM wrapper commoditization.</span>
+          </div>
+          <div class="p-4 sm:p-5 rounded-2xl bg-zinc-50/90 border border-zinc-200/70 min-w-0 break-words">
+            <span class="font-bold text-zinc-950 block text-sm mb-1.5 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-600 flex-shrink-0"></span> 2. Feasible Now (3–6 Month MVP Horizon)
+            </span>
+            <span class="text-zinc-600 leading-relaxed text-xs sm:text-sm">Built on accessible silicon, open algorithmic paradigms, or commercial-off-the-shelf microcontroller hardware that a small team can build in 90 to 180 days.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 Domain Teams Explorer -->
+      <div class="space-y-5 min-w-0">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight">The 10 Scout Domain Teams</h2>
+            <p class="text-xs sm:text-sm text-zinc-500 mt-1">Autonomous research agents deployed across deep-tech frontiers (50 verified papers each)</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-8 min-w-0" id="domain-teams-cards">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Readme Full Markdown Tab / Viewer -->
+      <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white border border-zinc-200/80 shadow-luma min-w-0 overflow-hidden">
+        <div class="flex items-center justify-between mb-4 border-b border-zinc-100 pb-4">
+          <h3 class="font-bold text-base sm:text-lg text-zinc-950 flex items-center gap-2.5">
+            <i data-lucide="book-open" class="w-5 h-5 text-indigo-600 flex-shrink-0"></i> Master Repository Readme Documentation
+          </h3>
+          <button onclick="toggleElement('readme-markdown-box')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-xs sm:text-sm font-semibold text-indigo-700 transition flex-shrink-0">
+            Toggle Full Text
+          </button>
+        </div>
+        <div id="readme-markdown-box" class="prose-luma max-w-none text-sm sm:text-base leading-relaxed overflow-x-auto"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: PHONON DYNAMICS DEEP-TECH SHOWCASE -->
+    <section id="view-phonon" class="view-panel hidden space-y-8 min-w-0">
+      <!-- Phonon Hero -->
+      <div class="rounded-3xl p-6 sm:p-10 lg:p-14 bg-gradient-to-br from-amber-500/10 via-rose-500/5 to-purple-500/10 border border-amber-200/70 shadow-luma min-w-0 overflow-hidden" style="contain: paint;">
+        <div class="max-w-4xl min-w-0">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300/70 mb-4 shadow-sm">
+            ⚡ The Definitive Sovereign Breakthrough
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight leading-tight break-words">
+            PHONON DYNAMICS (<code class="text-amber-700 font-mono text-xl sm:text-3xl font-bold break-all">phonon.energy</code>)
+          </h1>
+          <p class="mt-4 text-sm sm:text-base text-zinc-800 italic font-medium leading-relaxed bg-white/60 p-4 sm:p-6 rounded-2xl border border-amber-200/50 backdrop-blur-sm break-words">
+            "A $180 clip-on acoustic transducer that uses targeted ultrasonic micro-streaming to shatter the stagnant fluid boundary layer inside liquid-cooled AI supercomputers—instantly dropping GPU junction temperatures by 18°C in 15 seconds, liberating 30% stranded compute from thermal throttling, and minting zero-knowledge 'Negawatts' to legally bypass sovereign power grid moratoria."
+          </p>
+        </div>
+      </div>
+
+      <!-- Subtabs for Phonon Dynamics -->
+      <div class="flex items-center gap-2 bg-zinc-100/80 p-1.5 rounded-2xl border border-zinc-200/60 overflow-x-auto no-scrollbar text-xs sm:text-sm font-semibold max-w-full">
+        <button onclick="switchPhononTab('invention')" id="ptab-invention" class="phonon-subtab px-4 py-2.5 rounded-xl bg-zinc-900 text-white transition whitespace-nowrap shadow-sm">
+          Master Architecture & Physics
+        </button>
+        <button onclick="switchPhononTab('memo')" id="ptab-memo" class="phonon-subtab px-4 py-2.5 rounded-xl text-zinc-600 hover:text-zinc-900 transition whitespace-nowrap">
+          VC Investment Memo & Term Sheet
+        </button>
+        <button onclick="switchPhononTab('manual')" id="ptab-manual" class="phonon-subtab px-4 py-2.5 rounded-xl text-zinc-600 hover:text-zinc-900 transition whitespace-nowrap">
+          72-Hour Student Field Manual & BOM
+        </button>
+      </div>
+
+      <!-- Subtab 1: Invention & Physics -->
+      <div id="pcontent-invention" class="phonon-panel glass-card rounded-3xl p-5 sm:p-10 prose-luma max-w-none text-sm sm:text-base leading-relaxed bg-white border border-zinc-200/80 shadow-luma min-w-0 overflow-hidden"></div>
+
+      <!-- Subtab 2: VC Investment Memo -->
+      <div id="pcontent-memo" class="phonon-panel hidden glass-card rounded-3xl p-5 sm:p-10 prose-luma max-w-none text-sm sm:text-base leading-relaxed bg-white border border-zinc-200/80 shadow-luma min-w-0 overflow-hidden"></div>
+
+      <!-- Subtab 3: Student Field Manual -->
+      <div id="pcontent-manual" class="phonon-panel hidden space-y-8 min-w-0">
+        <!-- Interactive BOM Cost Calculator Card -->
+        <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white border border-amber-200/80 shadow-luma min-w-0 overflow-hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-zinc-100 pb-5">
+            <div>
+              <h3 class="font-bold text-lg sm:text-xl text-zinc-950 flex items-center gap-2.5">
+                <i data-lucide="calculator" class="w-5 h-5 text-amber-500 flex-shrink-0"></i> 72-Hour Dorm Prototype Bill of Materials (BOM)
+              </h3>
+              <p class="text-xs sm:text-sm text-zinc-500 mt-1">Exact component pricing from DigiKey / Amazon</p>
+            </div>
+            <div class="bg-emerald-50 px-4 py-2.5 rounded-2xl border border-emerald-200/70 text-right flex items-center gap-3 self-start sm:self-auto">
+              <span class="text-xs text-zinc-500 font-medium">Total Unit Cost:</span>
+              <p id="bom-total-display" class="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono">$139.43</p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto text-xs sm:text-sm -mx-2 sm:mx-0">
+            <table class="w-full border-collapse min-w-[540px]">
+              <thead>
+                <tr class="bg-zinc-50 border-b border-zinc-200 text-zinc-700 font-semibold text-left">
+                  <th class="p-3.5">Component</th>
+                  <th class="p-3.5">Spec / Model</th>
+                  <th class="p-3.5">Vendor</th>
+                  <th class="p-3.5 text-right">Unit Price</th>
+                  <th class="p-3.5 text-center">Qty</th>
+                  <th class="p-3.5 text-right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="bom-table-body" class="divide-y divide-zinc-100">
+                <!-- Generated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- C++ Firmware Code Viewer -->
+        <div class="glass-card rounded-3xl p-4 sm:p-8 bg-zinc-950 text-white shadow-2xl min-w-0 overflow-hidden">
+          <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-4">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <span class="w-3 h-3 rounded-full bg-rose-500 flex-shrink-0"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500 flex-shrink-0"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></span>
+              <span class="text-xs font-mono text-zinc-400 ml-2 truncate">firmware/esp32_phonon_driver.cpp</span>
+            </div>
+            <button onclick="copyFirmwareCode()" class="px-3.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-300 transition flex items-center gap-1.5 flex-shrink-0">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copy Code
+            </button>
+          </div>
+          <pre class="font-mono text-xs sm:text-sm overflow-x-auto text-emerald-400 p-3 leading-relaxed max-w-full" id="firmware-code-block">// Loading ESP32-S3 firmware...</pre>
+        </div>
+
+        <!-- Full Student Field Manual Markdown -->
+        <div class="glass-card rounded-3xl p-5 sm:p-10 prose-luma max-w-none text-sm sm:text-base leading-relaxed bg-white border border-zinc-200/80 shadow-luma min-w-0 overflow-hidden" id="student-manual-markdown"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: THE 100-PERSONA COUNCIL (53 STARTUPS) -->
+    <section id="view-council" class="view-panel hidden space-y-6 min-w-0">
+      <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white min-w-0 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="min-w-0">
+            <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-800 border border-purple-200/60 mb-2">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-purple-600"></i> 50 CEOs + 50 Philosophers
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight break-words">The 100-Persona Council</h1>
+            <p class="text-xs sm:text-sm text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+              Convened under a strict first-principles creation mandate (pure creation, zero evaluation of prior work), yielding <strong class="text-zinc-900 font-semibold">53 radical sovereign startup architectures</strong> across physical and epistemological substrates.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 flex-shrink-0 flex-wrap sm:flex-nowrap">
+            <button onclick="switchCouncilSubView('cards')" id="cview-btn-cards" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-900 text-white transition">
+              53 Startup Cards
+            </button>
+            <button onclick="switchCouncilSubView('findings')" id="cview-btn-findings" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition">
+              Council Findings & Blueprint
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Faction Filter Chips -->
+      <div id="council-cards-section" class="space-y-6 min-w-0">
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs max-w-full">
+          <span class="text-zinc-400 font-semibold flex-shrink-0 mr-1">Faction:</span>
+          <div id="faction-filter-chips" class="flex items-center gap-1.5 whitespace-nowrap">
+            <!-- Filter chips generated via JS -->
+          </div>
+        </div>
+
+        <!-- Startups Grid (Spacious 2 columns) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 min-w-0" id="council-startups-grid">
+          <!-- 53 Startup cards rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Council Findings & Master Blueprint Panel -->
+      <div id="council-findings-section" class="hidden space-y-8 min-w-0">
+        <div class="glass-card rounded-3xl p-5 sm:p-10 prose-luma max-w-none text-sm sm:text-base min-w-0 overflow-hidden" id="council-findings-markdown"></div>
+        <div class="glass-card rounded-3xl p-5 sm:p-10 prose-luma max-w-none text-sm sm:text-base min-w-0 overflow-hidden" id="council-blueprint-markdown"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: 500 RESEARCH SCOUTS DATABASE -->
+    <section id="view-scouts" class="view-panel hidden space-y-8 min-w-0">
+      <!-- Scouts Header & Search Controls -->
+      <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white min-w-0 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 min-w-0">
+          <div class="min-w-0">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight break-words">500 Blue-Ocean Research Papers</h1>
+            <p class="text-xs sm:text-sm text-zinc-500 mt-1.5 leading-relaxed">
+              Curated by 10 autonomous Batman-Family scout teams. 100% verified arXiv & DOI links.
+            </p>
+          </div>
+          
+          <!-- View Modes, Count & Export -->
+          <div class="flex items-center gap-2.5 self-start sm:self-auto flex-shrink-0">
+            <span id="filtered-papers-count" class="text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200 whitespace-nowrap">
+              500 Papers
+            </span>
+            <button onclick="downloadPapersCSV()" title="Export CSV" class="p-2 rounded-xl bg-white border border-zinc-200 text-zinc-600 hover:text-zinc-900 shadow-sm transition">
+              <i data-lucide="download" class="w-4 h-4"></i>
+            </button>
+            <div class="flex items-center bg-zinc-100 p-1 rounded-xl border border-zinc-200">
+              <button onclick="setScoutsViewMode('grid')" id="sview-grid" class="p-1.5 rounded-lg bg-white shadow-sm text-zinc-800 transition" title="Cards View">
+                <i data-lucide="grid" class="w-4 h-4"></i>
+              </button>
+              <button onclick="setScoutsViewMode('table')" id="sview-table" class="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-800 transition" title="Table View">
+                <i data-lucide="list" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Filters & Search Controls -->
+        <div class="space-y-4 min-w-0">
+          <!-- Text Search & Sort Bar -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs sm:text-sm min-w-0">
+            <div class="sm:col-span-8 relative min-w-0">
+              <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input type="text" id="paper-search-input" oninput="filterPapersDebounced()" placeholder="Search 500 papers by title, author, breakthrough, or keyword..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200/80 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition text-zinc-900 placeholder:text-zinc-400 font-medium">
+            </div>
+            <div class="sm:col-span-4 flex items-center gap-2 min-w-0">
+              <select id="paper-sort-select" onchange="filterPapers()" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200/80 text-zinc-700 font-medium focus:outline-none">
+                <option value="score_desc">Total Score (High → Low)</option>
+                <option value="novelty_desc">Novelty Score (Highest)</option>
+                <option value="feasibility_desc">Feasibility Score (Highest)</option>
+                <option value="moat_desc">Moat Depth (Deepest)</option>
+                <option value="comm_desc">Commercialization (Highest)</option>
+                <option value="year_desc">Year (Newest)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Domain Filter Chips (Horizontal Scroll on Mobile) -->
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 max-w-full" id="scout-domain-chips">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Papers Container (Cards Grid or Table) -->
+      <div id="papers-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 min-w-0">
+        <!-- Paper cards rendered via JS -->
+      </div>
+
+      <div id="papers-table-container" class="hidden glass-card rounded-2xl overflow-hidden bg-white min-w-0">
+        <div class="overflow-x-auto text-xs sm:text-sm">
+          <table class="w-full border-collapse min-w-[680px]">
+            <thead>
+              <tr class="bg-zinc-50 border-b border-zinc-200 text-zinc-600 font-semibold text-left">
+                <th class="p-3.5">ID</th>
+                <th class="p-3.5">Paper Title & Authors</th>
+                <th class="p-3.5">Scout Team</th>
+                <th class="p-3.5 text-center">Novelty</th>
+                <th class="p-3.5 text-center">Feas.</th>
+                <th class="p-3.5 text-center">Moat</th>
+                <th class="p-3.5 text-center">Comm.</th>
+                <th class="p-3.5 text-center">Total</th>
+                <th class="p-3.5 text-center">Link</th>
+              </tr>
+            </thead>
+            <tbody id="papers-table-body" class="divide-y divide-zinc-100">
+              <!-- Table rows rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination / Load More Button -->
+      <div id="papers-pagination-controls" class="flex items-center justify-center gap-3 pt-6 min-w-0">
+        <button id="load-more-papers-btn" onclick="loadMorePapers()" class="px-6 py-3 rounded-xl bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-50 font-semibold text-xs sm:text-sm transition shadow-sm">
+          Load More Papers
+        </button>
+        <button id="show-all-papers-btn" onclick="showAllPapers()" class="px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-semibold text-xs sm:text-sm transition">
+          Show All (500)
+        </button>
+      </div>
+
+      <!-- Scout Team Deep Markdown Reports -->
+      <div class="glass-card rounded-3xl p-5 sm:p-10 bg-white mt-8 sm:mt-10 min-w-0 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-zinc-100 pb-4 min-w-0">
+          <div>
+            <h3 class="font-bold text-lg text-zinc-950">10 Domain Scouting Synthesis Reports</h3>
+            <p class="text-xs sm:text-sm text-zinc-500">Read the extensive literature review written by each autonomous scout</p>
+          </div>
+          <select id="scout-report-select" onchange="renderSelectedScoutReport()" class="px-3.5 py-2 rounded-xl bg-zinc-50 border border-zinc-200 text-xs sm:text-sm font-medium text-zinc-700 max-w-full">
+            <!-- Options dynamically added -->
+          </select>
+        </div>
+        <div id="scout-report-content" class="prose-luma max-w-none text-sm leading-relaxed overflow-x-auto"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: TOP 15 VENTURE PITCH BLUEPRINTS -->
+    <section id="view-blueprints" class="view-panel hidden space-y-8 min-w-0">
+      <div class="glass-card rounded-3xl p-5 sm:p-10 bg-white min-w-0 overflow-hidden">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/60 mb-3">
+          🚀 Seed Stage Pitch Blueprints
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight break-words">Top 15 Elite Venture Blueprints</h1>
+        <p class="text-sm sm:text-base text-zinc-600 mt-2 max-w-3xl leading-relaxed">
+          Complete, institution-grade startup pitch blueprints derived from the highest-scoring blue ocean papers. Each venture includes First-Principles Problem, Proprietary Architecture, Defensibility Moat, Unit Economics, 12-Month Milestones, and Seed Round Ask.
+        </p>
+
+        <!-- Sub navigation pills -->
+        <div class="mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs sm:text-sm max-w-full">
+          <button onclick="switchBlueprintSubView('list')" id="bp-btn-list" class="px-4 py-2 rounded-xl font-semibold bg-zinc-900 text-white transition whitespace-nowrap">
+            15 Pitch Blueprints
+          </button>
+          <button onclick="switchBlueprintSubView('empire')" id="bp-btn-empire" class="px-4 py-2 rounded-xl font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition whitespace-nowrap">
+            Startup Empire Specs
+          </button>
+          <button onclick="switchBlueprintSubView('mvp')" id="bp-btn-mvp" class="px-4 py-2 rounded-xl font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition whitespace-nowrap">
+            Staging MVP Code (Python)
+          </button>
+        </div>
+      </div>
+
+      <!-- Blueprint Cards List (Spacious 2 columns) -->
+      <div id="blueprints-list-section" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 min-w-0">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Startup Empire Specs Viewer -->
+      <div id="blueprints-empire-section" class="hidden glass-card rounded-3xl p-5 sm:p-10 bg-white prose-luma max-w-none text-sm sm:text-base leading-relaxed border border-zinc-200/80 shadow-luma min-w-0 overflow-hidden"></div>
+
+      <!-- Staging MVP Code Viewer -->
+      <div id="blueprints-mvp-section" class="hidden space-y-4 min-w-0">
+        <div class="glass-card rounded-3xl p-4 sm:p-8 bg-zinc-950 text-white shadow-2xl min-w-0 overflow-hidden">
+          <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-4 min-w-0">
+            <span class="text-xs sm:text-sm font-mono text-zinc-400 truncate pr-2">04_venture_pitch_blueprints/staging_mvp.py</span>
+            <button onclick="copyStagingMvpCode()" class="px-3.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-300 transition flex items-center gap-1.5 flex-shrink-0">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copy Script
+            </button>
+          </div>
+          <pre class="font-mono text-xs sm:text-sm overflow-x-auto text-emerald-400 p-3 leading-relaxed max-w-full" id="staging-mvp-code-block"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: VIRAL LAUNCH ARSENAL (X / TWITTER DRAFTS) -->
+    <section id="view-tweets" class="view-panel hidden space-y-6 min-w-0">
+      <div class="glass-card rounded-3xl p-5 sm:p-8 bg-white min-w-0 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 min-w-0">
+          <div class="min-w-0">
+            <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200/60 mb-2">
+              <i data-lucide="twitter" class="w-3.5 h-3.5 text-sky-500"></i> Social Media Launch Campaign
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight break-words">Day 1 Viral Launch Thread</h1>
+            <p class="text-xs sm:text-sm text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+              High-converting tweet thread drafts crafted to unveil the 500-paper discovery and Phonon Dynamics on X / Twitter.
+            </p>
+          </div>
+          <button onclick="copyFullTweetThread()" class="shiny-btn px-4 py-2 rounded-xl text-white font-semibold text-xs flex items-center gap-2 self-start sm:self-auto flex-shrink-0">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copy Full Thread (7 Tweets)
+          </button>
+        </div>
+      </div>
+
+      <!-- Individual Tweet Cards -->
+      <div class="max-w-2xl mx-auto space-y-4 min-w-0" id="tweet-cards-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 5. DETAIL MODAL / BOTTOM SHEET (MOBILE-FIRST)             -->
+  <!-- ========================================================= -->
+  <div id="detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" onclick="closeDetailModal()" class="fixed inset-0 bg-zinc-900/40 backdrop-blur-sm transition-opacity"></div>
+
+    <div class="min-h-full flex items-end sm:items-center justify-center p-0 sm:p-4 text-center">
+      <div class="relative bg-white rounded-t-[32px] sm:rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all w-full sm:max-w-3xl md:max-w-4xl max-h-[92vh] flex flex-col border border-zinc-200/90 min-w-0">
+        
+        <!-- Mobile Bottom Sheet Handle -->
+        <div class="w-12 h-1.5 rounded-full bg-zinc-300 mx-auto my-3 sm:hidden flex-shrink-0"></div>
+
+        <!-- Modal Top Bar -->
+        <div class="px-5 sm:px-8 py-4 sm:py-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/80 min-w-0">
+          <div class="flex items-center gap-2.5 min-w-0 flex-wrap" id="modal-badge-container">
+            <!-- Badge inserted here -->
+          </div>
+          <button onclick="closeDetailModal()" class="p-2 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-xl transition flex-shrink-0 ml-2" title="Close modal">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="px-5 sm:px-9 py-5 sm:py-8 overflow-y-auto space-y-6 text-sm sm:text-base leading-relaxed min-w-0" id="modal-body">
+          <!-- Dynamic Content -->
+        </div>
+
+        <!-- Modal Bottom Actions -->
+        <div class="px-5 sm:px-9 py-4 bg-zinc-50/90 border-t border-zinc-100 flex items-center justify-between text-xs sm:text-sm min-w-0" id="modal-footer">
+          <!-- Action buttons -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 6. GLOBAL OMNI-SEARCH MODAL                               -->
+  <!-- ========================================================= -->
+  <div id="search-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" role="dialog" aria-modal="true">
+    <div onclick="closeSearchModal()" class="fixed inset-0 bg-zinc-900/40 backdrop-blur-sm transition-opacity"></div>
+
+    <div class="min-h-full flex items-start justify-center p-3 sm:p-6 text-left">
+      <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl overflow-hidden border border-zinc-200 mt-12 sm:mt-16 flex flex-col max-h-[85vh] min-w-0">
+        <!-- Search Input Header -->
+        <div class="p-4 sm:p-6 border-b border-zinc-200/80 flex items-center gap-3 bg-white min-w-0">
+          <i data-lucide="search" class="w-5 sm:w-6 h-5 sm:h-6 text-zinc-400 flex-shrink-0"></i>
+          <input type="text" id="omni-search-input" oninput="runOmniSearch()" placeholder="Type to search all 500 papers, 53 startups, blueprints..." class="w-full text-sm sm:text-base font-medium text-zinc-900 focus:outline-none placeholder:text-zinc-400 min-w-0">
+          <kbd class="hidden sm:inline-block px-2.5 py-1 text-xs bg-zinc-100 rounded-lg text-zinc-500 font-mono border border-zinc-200 flex-shrink-0">ESC</kbd>
+        </div>
+
+        <!-- Search Results List -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 min-w-0" id="omni-search-results">
+          <div class="p-8 sm:p-10 text-center text-sm text-zinc-400">
+            Start typing to instantly query the entire repository...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 7. TOAST NOTIFICATION CONTAINER                           -->
+  <!-- ========================================================= -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ========================================================= -->
+  <!-- 8. CORE APPLICATION SCRIPT                                -->
+  <!-- ========================================================= -->
+  <script id="main-app-script">
+    // Global State
+    let BUNDLE = null;
+    let currentTab = 'overview';
+    let activeDomainFilter = 'all';
+    let activeCouncilFaction = 'all';
+    let activeBlueprintSubView = 'list';
+    let currentScoutsViewMode = 'grid'; // 'grid' or 'table'
+    let visiblePapersCount = 24;
+    let filteredPapersList = [];
+
+    // Initialize App
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const rawJson = document.getElementById('repo-data').textContent;
+        BUNDLE = JSON.parse(rawJson);
+        console.log('Repo data bundle loaded:', BUNDLE);
+      } catch (err) {
+        console.error('Failed to parse repository bundle:', err);
+        alert('Error loading data bundle.');
+        return;
+      }
+
+      // Init UI components
+      initOverviewKPIs();
+      initDomainTeams();
+      initScoutDomainFilterChips();
+      initCouncilFactionChips();
+      initCouncilStartups();
+      initTopBlueprints();
+      initTweetThreads();
+      initPhononDocs();
+      initFirmwareViewer();
+      initBOMTable();
+      initStagingMvpViewer();
+      initScoutReportsSelector();
+      renderReadmeMarkdown();
+
+      // Filter and render initial papers
+      filterPapers();
+
+      // Setup Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearchModal();
+        }
+        if (e.key === 'Escape') {
+          closeSearchModal();
+          closeDetailModal();
+          closeDrawer();
+        }
+      });
+
+      // Render Lucide icons
+      lucide.createIcons();
+
+      // Check URL hash for initial tab
+      if (window.location.hash) {
+        const h = window.location.hash.replace('#', '');
+        if (['overview', 'phonon', 'council', 'scouts', 'blueprints', 'tweets'].includes(h)) {
+          navTo(h);
+        }
+      }
+    });
+
+    // Navigation Engine & Breadcrumbs Synchronizer
+    function navTo(tabId, subTitle = null) {
+      currentTab = tabId;
+      window.location.hash = tabId;
+
+      // Update View Panels
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      const activePanel = document.getElementById(`view-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update Tabs (Desktop & Mobile Segmented Controls)
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.className = 'tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 bg-white text-zinc-950 font-bold flex items-center gap-1.5 shadow-sm border border-zinc-200/80 text-xs whitespace-nowrap';
+        } else {
+          btn.className = 'tab-btn px-3.5 py-1.5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-zinc-900 hover:bg-white/60 font-medium flex items-center gap-1.5 text-xs whitespace-nowrap';
+        }
+      });
+
+      // Update Drawer Links
+      document.querySelectorAll('.drawer-link').forEach(btn => {
+        if (btn.getAttribute('data-target') === tabId) {
+          btn.classList.add('bg-zinc-100', 'text-zinc-900', 'font-bold');
+        } else {
+          btn.classList.remove('bg-zinc-100', 'text-zinc-900', 'font-bold');
+        }
+      });
+
+      // Update Breadcrumbs
+      const names = {
+        'overview': 'Executive Synthesis',
+        'phonon': 'Phonon Dynamics (Negawatt)',
+        'council': '100-Persona Council (53 Startups)',
+        'scouts': '500 Research Scouts',
+        'blueprints': 'Top 15 Venture Blueprints',
+        'tweets': 'Day 1 Launch Arsenal'
+      };
+      document.getElementById('bc-section').textContent = names[tabId] || tabId;
+
+      const subWrapper = document.getElementById('bc-sub-wrapper');
+      const subElem = document.getElementById('bc-subsection');
+      if (subTitle) {
+        subElem.textContent = subTitle;
+        subWrapper.classList.remove('hidden');
+        subWrapper.classList.add('flex');
+      } else {
+        subWrapper.classList.add('hidden');
+        subWrapper.classList.remove('flex');
+      }
+
+      // Scroll to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Drawer Controls
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+
+    hamburgerBtn.addEventListener('click', toggleDrawer);
+
+    function toggleDrawer() {
+      const isOpen = mobileDrawer.classList.contains('drawer-open');
+      if (isOpen) closeDrawer();
+      else openDrawer();
+    }
+
+    function openDrawer() {
+      mobileDrawer.classList.add('drawer-open');
+      drawerBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      drawerBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    function closeDrawer() {
+      mobileDrawer.classList.remove('drawer-open');
+      drawerBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      drawerBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+
+    // 1. Overview KPIs
+    function initOverviewKPIs() {
+      const s = BUNDLE.stats;
+      const container = document.getElementById('kpi-grid');
+      const items = [
+        { label: 'Scouted Papers', val: `${s.total_papers}`, sub: '100% Verified Links', icon: 'file-text', color: 'text-blue-600' },
+        { label: 'Avg Novelty', val: `${s.avg_novelty} / 10`, sub: 'Radical Uniqueness', icon: 'sparkles', color: 'text-amber-600' },
+        { label: 'Avg Feasibility', val: `${s.avg_feasibility} / 10`, sub: '3-6 Mo. MVP Horizon', icon: 'cpu', color: 'text-emerald-600' },
+        { label: 'Avg Moat Depth', val: `${s.avg_moat} / 10`, sub: 'Anti-Commoditization', icon: 'shield', color: 'text-purple-600' },
+        { label: 'Composite Score', val: `${s.avg_total} / 40`, sub: 'Across 500 Papers', icon: 'award', color: 'text-rose-600' },
+      ];
+      container.innerHTML = items.map(it => `
+        <div class="glass-card rounded-2xl p-4 sm:p-5 bg-white hover:border-zinc-300 transition duration-200 min-w-0 overflow-hidden">
+          <div class="flex items-center justify-between mb-2 sm:mb-3">
+            <span class="text-[11px] sm:text-xs text-zinc-400 font-bold uppercase tracking-wider truncate mr-1">${it.label}</span>
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-zinc-50 border border-zinc-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="${it.icon}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 ${it.color}"></i>
+            </div>
+          </div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-zinc-950 tracking-tight font-mono truncate">${it.val}</div>
+          <div class="text-[11px] sm:text-xs text-zinc-500 mt-1.5 sm:mt-2 font-medium truncate">${it.sub}</div>
+        </div>
+      `).join('');
+    }
+
+    // 2. Domain Teams Cards
+    function initDomainTeams() {
+      const container = document.getElementById('domain-teams-cards');
+      const drawerList = document.getElementById('drawer-domain-list');
+      const scouts = Object.values(BUNDLE.scout_meta);
+
+      container.innerHTML = scouts.map(s => `
+        <div class="glass-card rounded-3xl p-5 sm:p-7 bg-white border border-zinc-200/80 hover:border-zinc-300 transition duration-200 cursor-pointer flex flex-col justify-between shadow-luma min-w-0 overflow-hidden" onclick="filterByScoutTeam('${s.info.agent}')">
+          <div class="min-w-0">
+            <div class="flex items-center justify-between mb-3 gap-2 flex-wrap">
+              <span class="text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap" style="background-color: ${s.info.color}15; color: ${s.info.color}; border: 1px solid ${s.info.color}30">
+                ${s.info.agent}
+              </span>
+              <span class="text-xs font-bold text-zinc-400 font-mono bg-zinc-100 px-2.5 py-0.5 rounded-full whitespace-nowrap">${s.paper_count} Papers</span>
+            </div>
+            <h4 class="font-bold text-base sm:text-lg text-zinc-950 tracking-tight leading-snug break-words">${s.info.domain}</h4>
+            <p class="text-xs sm:text-sm text-zinc-600 mt-2.5 sm:mt-3 leading-relaxed break-words">${s.info.theme}</p>
+          </div>
+          <div class="mt-5 sm:mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs sm:text-sm text-indigo-600 font-semibold">
+            <span>Explore 50 Deep-Tech Papers</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 flex-shrink-0"></i>
+          </div>
+        </div>
+      `).join('');
+
+      drawerList.innerHTML = scouts.map(s => `
+        <button onclick="filterByScoutTeam('${s.info.agent}'); closeDrawer()" class="w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 transition text-left">
+          <span class="truncate">${s.info.agent} (${s.info.badge})</span>
+          <span class="font-mono text-[10px] text-zinc-400">50</span>
+        </button>
+      `).join('');
+    }
+
+    // Filter Papers by Scout Team
+    function filterByScoutTeam(agentName) {
+      activeDomainFilter = agentName;
+      navTo('scouts', `Team: ${agentName}`);
+      // Update filter chips
+      document.querySelectorAll('.scout-chip').forEach(c => {
+        if (c.getAttribute('data-domain') === agentName) {
+          c.className = 'scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 text-white transition flex-shrink-0';
+        } else {
+          c.className = 'scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition flex-shrink-0';
+        }
+      });
+      filterPapers();
+    }
+
+    // 3. Scout Domain Filter Chips
+    function initScoutDomainFilterChips() {
+      const container = document.getElementById('scout-domain-chips');
+      const scouts = Object.values(BUNDLE.scout_meta);
+      
+      let html = `
+        <button onclick="setDomainFilter('all')" class="scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 text-white transition flex-shrink-0" data-domain="all">
+          All (500)
+        </button>
+        <button onclick="setDomainFilter('elite')" class="scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex-shrink-0" data-domain="elite">
+          ⭐ Elite Top Tier (37+)
+        </button>
+      `;
+
+      scouts.forEach(s => {
+        html += `
+          <button onclick="setDomainFilter('${s.info.agent}')" class="scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition flex-shrink-0" data-domain="${s.info.agent}">
+            ${s.info.agent} (${s.paper_count})
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function setDomainFilter(dom) {
+      activeDomainFilter = dom;
+      document.querySelectorAll('.scout-chip').forEach(c => {
+        if (c.getAttribute('data-domain') === dom) {
+          c.className = 'scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 text-white transition flex-shrink-0';
+        } else if (c.getAttribute('data-domain') === 'elite') {
+          c.className = 'scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex-shrink-0';
+        } else {
+          c.className = 'scout-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition flex-shrink-0';
+        }
+      });
+      filterPapers();
+    }
+
+    // Debounce search
+    let searchDebounceTimer;
+    function filterPapersDebounced() {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(filterPapers, 200);
+    }
+
+    // Filter and Sort 500 Papers
+    function filterPapers() {
+      const query = (document.getElementById('paper-search-input')?.value || '').toLowerCase().trim();
+      const sortBy = document.getElementById('paper-sort-select')?.value || 'score_desc';
+
+      let results = BUNDLE.papers.filter(p => {
+        if (activeDomainFilter === 'elite') {
+          if (p.total_score < 37.0) return false;
+        } else if (activeDomainFilter !== 'all' && p.agent !== activeDomainFilter) {
+          return false;
+        }
+
+        if (query) {
+          const str = `${p.title} ${p.authors} ${p.institution} ${p.breakthrough} ${p.domain} ${p.blue_ocean_thesis} ${p.id}`.toLowerCase();
+          return str.includes(query);
+        }
+        return true;
+      });
+
+      // Sort
+      if (sortBy === 'score_desc') {
+        results.sort((a, b) => b.total_score - a.total_score);
+      } else if (sortBy === 'novelty_desc') {
+        results.sort((a, b) => b.novelty_score - a.novelty_score);
+      } else if (sortBy === 'feasibility_desc') {
+        results.sort((a, b) => b.feasibility_score - a.feasibility_score);
+      } else if (sortBy === 'moat_desc') {
+        results.sort((a, b) => b.moat_score - a.moat_score);
+      } else if (sortBy === 'comm_desc') {
+        results.sort((a, b) => b.commercialization_score - a.commercialization_score);
+      } else if (sortBy === 'year_desc') {
+        results.sort((a, b) => (b.year || 0) - (a.year || 0));
+      }
+
+      filteredPapersList = results;
+      visiblePapersCount = 24; // reset pagination
+      document.getElementById('filtered-papers-count').textContent = `${results.length} Papers`;
+      
+      renderPapersView();
+    }
+
+    function renderPapersView() {
+      const slice = filteredPapersList.slice(0, visiblePapersCount);
+
+      // Render Cards Grid
+      const gridContainer = document.getElementById('papers-grid-container');
+      gridContainer.innerHTML = slice.map(p => `
+        <div class="glass-card rounded-3xl p-5 sm:p-7 bg-white flex flex-col justify-between hover:border-zinc-300 transition duration-200 shadow-luma min-w-0 overflow-hidden">
+          <div class="min-w-0">
+            <div class="flex items-center justify-between gap-2 mb-3 flex-wrap">
+              <span class="text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap" style="background-color: ${p.color}15; color: ${p.color}; border: 1px solid ${p.color}30">
+                ${p.agent}
+              </span>
+              <span class="font-mono text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/70 shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                ${p.total_score} / 40
+              </span>
+            </div>
+
+            <h4 class="font-bold text-base sm:text-lg text-zinc-950 tracking-tight leading-snug break-words">
+              ${p.title}
+            </h4>
+
+            <p class="text-xs sm:text-sm text-zinc-500 mt-2 break-words">
+              ${p.authors} ${p.year ? `(${p.year})` : ''} ${p.venue ? `• ${p.venue}` : ''}
+            </p>
+
+            <div class="bg-zinc-50/90 p-4 rounded-2xl border border-zinc-100 text-xs sm:text-sm text-zinc-700 leading-relaxed mt-4 min-w-0">
+              <strong class="text-zinc-900 font-semibold block text-xs uppercase tracking-wider mb-1.5 text-zinc-400">Core Breakthrough</strong>
+              <p class="line-clamp-3 break-words">${p.breakthrough || p.blue_ocean_thesis}</p>
+            </div>
+
+            <!-- 4 Metrics Breakdown -->
+            <div class="grid grid-cols-4 gap-1.5 sm:gap-2 mt-4 pt-3 border-t border-zinc-100 text-center min-w-0">
+              <div class="bg-zinc-50/80 p-2 rounded-xl border border-zinc-100 min-w-0">
+                <span class="text-[10px] text-zinc-400 block font-semibold truncate">NOV</span>
+                <span class="font-mono font-bold text-zinc-800 text-xs sm:text-sm">${p.novelty_score}</span>
+              </div>
+              <div class="bg-zinc-50/80 p-2 rounded-xl border border-zinc-100 min-w-0">
+                <span class="text-[10px] text-zinc-400 block font-semibold truncate">FEAS</span>
+                <span class="font-mono font-bold text-zinc-800 text-xs sm:text-sm">${p.feasibility_score}</span>
+              </div>
+              <div class="bg-zinc-50/80 p-2 rounded-xl border border-zinc-100 min-w-0">
+                <span class="text-[10px] text-zinc-400 block font-semibold truncate">MOAT</span>
+                <span class="font-mono font-bold text-zinc-800 text-xs sm:text-sm">${p.moat_score}</span>
+              </div>
+              <div class="bg-zinc-50/80 p-2 rounded-xl border border-zinc-100 min-w-0">
+                <span class="text-[10px] text-zinc-400 block font-semibold truncate">COMM</span>
+                <span class="font-mono font-bold text-zinc-800 text-xs sm:text-sm">${p.commercialization_score}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 sm:mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs sm:text-sm gap-2 flex-wrap sm:flex-nowrap">
+            <button onclick="openPaperDetailModal('${p.id}')" class="font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5 py-1 whitespace-nowrap">
+              Read Deep Analysis <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
+            </button>
+            ${p.link ? `
+              <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-900 px-3 py-1.5 rounded-xl hover:bg-zinc-100 transition flex items-center gap-1.5 font-medium text-xs border border-transparent hover:border-zinc-200 whitespace-nowrap" title="Official Paper Link">
+                <span>Official Paper</span> <i data-lucide="external-link" class="w-3.5 h-3.5 flex-shrink-0"></i>
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      // Render Table View
+      const tableBody = document.getElementById('papers-table-body');
+      tableBody.innerHTML = slice.map(p => `
+        <tr class="hover:bg-zinc-50/80 transition cursor-pointer" onclick="openPaperDetailModal('${p.id}')">
+          <td class="p-3 font-mono text-[11px] text-zinc-400 font-semibold">${p.id}</td>
+          <td class="p-3 max-w-xs sm:max-w-md">
+            <p class="font-bold text-zinc-900 truncate">${p.title}</p>
+            <p class="text-[11px] text-zinc-500 truncate">${p.authors}</p>
+          </td>
+          <td class="p-3 whitespace-nowrap">
+            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full" style="background-color: ${p.color}15; color: ${p.color}">
+              ${p.agent}
+            </span>
+          </td>
+          <td class="p-3 text-center font-mono text-zinc-700">${p.novelty_score}</td>
+          <td class="p-3 text-center font-mono text-zinc-700">${p.feasibility_score}</td>
+          <td class="p-3 text-center font-mono text-zinc-700">${p.moat_score}</td>
+          <td class="p-3 text-center font-mono text-zinc-700">${p.commercialization_score}</td>
+          <td class="p-3 text-center font-mono font-bold text-emerald-700">${p.total_score}</td>
+          <td class="p-3 text-center" onclick="event.stopPropagation()">
+            ${p.link ? `<a href="${p.link}" target="_blank" class="text-indigo-600 hover:text-indigo-800"><i data-lucide="external-link" class="w-3.5 h-3.5 inline"></i></a>` : '-'}
+          </td>
+        </tr>
+      `).join('');
+
+      // Update Pagination Controls Visibility
+      const paginationControls = document.getElementById('papers-pagination-controls');
+      if (visiblePapersCount >= filteredPapersList.length) {
+        paginationControls.classList.add('hidden');
+      } else {
+        paginationControls.classList.remove('hidden');
+        document.getElementById('load-more-papers-btn').textContent = `Load More (${filteredPapersList.length - visiblePapersCount} remaining)`;
+      }
+
+      lucide.createIcons();
+    }
+
+    function loadMorePapers() {
+      visiblePapersCount += 24;
+      renderPapersView();
+    }
+
+    function showAllPapers() {
+      visiblePapersCount = filteredPapersList.length;
+      renderPapersView();
+    }
+
+    function setScoutsViewMode(mode) {
+      currentScoutsViewMode = mode;
+      const grid = document.getElementById('papers-grid-container');
+      const table = document.getElementById('papers-table-container');
+      const btnGrid = document.getElementById('sview-grid');
+      const btnTable = document.getElementById('sview-table');
+
+      if (mode === 'grid') {
+        grid.classList.remove('hidden');
+        table.classList.add('hidden');
+        btnGrid.classList.add('bg-white', 'shadow-sm', 'text-zinc-800');
+        btnGrid.classList.remove('text-zinc-500');
+        btnTable.classList.remove('bg-white', 'shadow-sm', 'text-zinc-800');
+        btnTable.classList.add('text-zinc-500');
+      } else {
+        grid.classList.add('hidden');
+        table.classList.remove('hidden');
+        btnTable.classList.add('bg-white', 'shadow-sm', 'text-zinc-800');
+        btnTable.classList.remove('text-zinc-500');
+        btnGrid.classList.remove('bg-white', 'shadow-sm', 'text-zinc-800');
+        btnGrid.classList.add('text-zinc-500');
+      }
+    }
+
+    // Paper Detail Modal
+    function openPaperDetailModal(paperId) {
+      const p = BUNDLE.papers.find(x => x.id === paperId);
+      if (!p) return;
+
+      const badgeContainer = document.getElementById('modal-badge-container');
+      const body = document.getElementById('modal-body');
+      const footer = document.getElementById('modal-footer');
+
+      badgeContainer.innerHTML = `
+        <span class="text-xs font-bold px-3 py-1 rounded-full" style="background-color: ${p.color}15; color: ${p.color}; border: 1px solid ${p.color}30">
+          ${p.agent} • ${p.domain}
+        </span>
+        <span class="font-mono text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          Total Score: ${p.total_score} / 40
+        </span>
+      `;
+
+      body.innerHTML = `
+        <div class="space-y-2">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-zinc-950 tracking-tight leading-snug">${p.title}</h2>
+          <div class="text-xs sm:text-sm text-zinc-500 flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-1">
+            <span><strong class="text-zinc-800 font-semibold">Authors:</strong> ${p.authors || 'N/A'}</span>
+            ${p.institution ? `<span><strong class="text-zinc-800 font-semibold">Institution:</strong> ${p.institution}</span>` : ''}
+            <span><strong class="text-zinc-800 font-semibold">Year:</strong> ${p.year || '2024'}</span>
+            ${p.venue ? `<span><strong class="text-zinc-800 font-semibold">Venue:</strong> ${p.venue}</span>` : ''}
+          </div>
+        </div>
+
+        <!-- 4 Score Dimensions Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 py-4 border-y border-zinc-100">
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-zinc-50 border border-zinc-100 text-center">
+            <span class="text-zinc-400 block text-xs uppercase font-bold tracking-wider mb-1">Novelty</span>
+            <span class="font-mono font-extrabold text-zinc-900 text-lg sm:text-xl">${p.novelty_score}<span class="text-xs text-zinc-400 font-normal">/10</span></span>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-zinc-50 border border-zinc-100 text-center">
+            <span class="text-zinc-400 block text-xs uppercase font-bold tracking-wider mb-1">Feasibility</span>
+            <span class="font-mono font-extrabold text-zinc-900 text-lg sm:text-xl">${p.feasibility_score}<span class="text-xs text-zinc-400 font-normal">/10</span></span>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-zinc-50 border border-zinc-100 text-center">
+            <span class="text-zinc-400 block text-xs uppercase font-bold tracking-wider mb-1">Moat Depth</span>
+            <span class="font-mono font-extrabold text-zinc-900 text-lg sm:text-xl">${p.moat_score}<span class="text-xs text-zinc-400 font-normal">/10</span></span>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-zinc-50 border border-zinc-100 text-center">
+            <span class="text-zinc-400 block text-xs uppercase font-bold tracking-wider mb-1">Commercial</span>
+            <span class="font-mono font-extrabold text-zinc-900 text-lg sm:text-xl">${p.commercialization_score}<span class="text-xs text-zinc-400 font-normal">/10</span></span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Core Breakthrough</h4>
+          <p class="text-sm sm:text-base text-zinc-800 leading-relaxed bg-zinc-50/80 p-4 sm:p-5 rounded-2xl border border-zinc-100">
+            ${p.breakthrough || 'Breakthrough analysis detailed in scout report.'}
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-purple-600">Blue Ocean Startup Thesis</h4>
+          <p class="text-sm sm:text-base text-purple-950 leading-relaxed bg-purple-50/70 p-4 sm:p-5 rounded-2xl border border-purple-100">
+            ${p.blue_ocean_thesis || 'Thesis formulated by autonomous scout team.'}
+          </p>
+        </div>
+      `;
+
+      footer.innerHTML = `
+        <button onclick="copyPaperCitation('${p.id}')" class="px-4 py-2.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 font-semibold hover:bg-zinc-50 transition flex items-center gap-2 text-xs sm:text-sm shadow-sm">
+          <i data-lucide="copy" class="w-4 h-4"></i> Copy Citation
+        </button>
+        ${p.link ? `
+          <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="shiny-btn px-5 py-2.5 rounded-xl text-white font-semibold transition flex items-center gap-2 text-xs sm:text-sm shadow-sm">
+            <span>Read Official Paper</span> <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        ` : ''}
+      `;
+
+      document.getElementById('detail-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detail-modal').classList.add('hidden');
+    }
+
+    // 4. Council Startups (53)
+    function initCouncilFactionChips() {
+      const container = document.getElementById('faction-filter-chips');
+      const factions = ['all', ...new Set(BUNDLE.startups.map(s => s.faction))];
+
+      container.innerHTML = factions.map(f => `
+        <button onclick="setCouncilFactionFilter('${f}')" class="faction-chip px-3 py-1 rounded-full text-xs font-semibold ${f === 'all' ? 'bg-zinc-900 text-white' : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'} transition flex-shrink-0" data-faction="${f}">
+          ${f === 'all' ? 'All 53 Startups' : f.replace('Faction ', '').split(':')[0]}
+        </button>
+      `).join('');
+    }
+
+    function setCouncilFactionFilter(f) {
+      activeCouncilFaction = f;
+      document.querySelectorAll('.faction-chip').forEach(c => {
+        if (c.getAttribute('data-faction') === f) {
+          c.className = 'faction-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 text-white transition flex-shrink-0';
+        } else {
+          c.className = 'faction-chip px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition flex-shrink-0';
+        }
+      });
+      initCouncilStartups();
+    }
+
+    function initCouncilStartups() {
+      const container = document.getElementById('council-startups-grid');
+      let list = BUNDLE.startups;
+
+      if (activeCouncilFaction !== 'all') {
+        list = list.filter(s => s.faction === activeCouncilFaction);
+      }
+
+      container.innerHTML = list.map(s => `
+        <div class="glass-card rounded-3xl p-5 sm:p-7 bg-white border border-zinc-200/80 hover:border-zinc-300 transition duration-200 flex flex-col justify-between shadow-luma min-w-0 overflow-hidden">
+          <div class="min-w-0">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200/70 inline-flex items-center gap-1.5 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span> #${s.number} • ${s.faction.split(':')[0]}
+              </span>
+            </div>
+
+            <h4 class="font-bold text-base sm:text-lg text-zinc-950 tracking-tight leading-snug break-words">
+              ${s.title}
+            </h4>
+
+            ${s.thesis ? `
+              <div class="mt-4 p-4 rounded-2xl bg-purple-50/50 border border-purple-100/70 text-xs sm:text-sm text-purple-950 leading-relaxed min-w-0">
+                <strong class="text-purple-900 font-semibold block text-xs uppercase tracking-wider mb-1 text-purple-400">Autonomous Thesis</strong>
+                <p class="line-clamp-3 break-words">${s.thesis}</p>
+              </div>
+            ` : ''}
+
+            ${s.problem ? `
+              <div class="mt-3.5 text-xs sm:text-sm text-zinc-600 line-clamp-2 leading-relaxed break-words min-w-0">
+                <strong class="text-zinc-900 font-semibold">Problem:</strong> ${s.problem}
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="mt-5 sm:mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs sm:text-sm">
+            <button onclick="openStartupDetailModal(${s.number})" class="font-semibold text-purple-700 hover:text-purple-900 flex items-center gap-1.5 py-1 whitespace-nowrap">
+              <span>View Sovereign Architecture</span> <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function switchCouncilSubView(view) {
+      const cardsSec = document.getElementById('council-cards-section');
+      const findingsSec = document.getElementById('council-findings-section');
+      const btnCards = document.getElementById('cview-btn-cards');
+      const btnFindings = document.getElementById('cview-btn-findings');
+
+      if (view === 'cards') {
+        cardsSec.classList.remove('hidden');
+        findingsSec.classList.add('hidden');
+        btnCards.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-900 text-white transition';
+        btnFindings.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition';
+      } else {
+        cardsSec.classList.add('hidden');
+        findingsSec.classList.remove('hidden');
+        btnFindings.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-900 text-white transition';
+        btnCards.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition';
+        
+        // Render markdown
+        document.getElementById('council-findings-markdown').innerHTML = marked.parse(BUNDLE.council_docs.findings);
+        document.getElementById('council-blueprint-markdown').innerHTML = marked.parse(BUNDLE.council_docs.master_blueprint);
+      }
+    }
+
+    function openStartupDetailModal(startupNumber) {
+      const s = BUNDLE.startups.find(x => x.number === startupNumber);
+      if (!s) return;
+
+      const badgeContainer = document.getElementById('modal-badge-container');
+      const body = document.getElementById('modal-body');
+      const footer = document.getElementById('modal-footer');
+
+      badgeContainer.innerHTML = `
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-purple-50 text-purple-800 border border-purple-200">
+          Council Creation #${s.number} • ${s.faction}
+        </span>
+      `;
+
+      body.innerHTML = `
+        <div class="prose-luma max-w-none text-sm sm:text-base leading-relaxed space-y-4">
+          ${marked.parse(s.raw_markdown)}
+        </div>
+      `;
+
+      footer.innerHTML = `
+        <span class="text-xs text-zinc-400 font-mono hidden sm:inline">100-Persona Council Sovereign Spec</span>
+        <button onclick="copyStartupSpec(${s.number})" class="shiny-btn px-4 py-2.5 rounded-xl text-white font-semibold transition flex items-center gap-2 text-xs sm:text-sm shadow-sm ml-auto sm:ml-0">
+          <i data-lucide="copy" class="w-4 h-4"></i> Copy Spec
+        </button>
+      `;
+
+      document.getElementById('detail-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // 5. Phonon Dynamics Tabs & Docs
+    function initPhononDocs() {
+      document.getElementById('pcontent-invention').innerHTML = marked.parse(BUNDLE.phonon_docs.invention);
+      document.getElementById('pcontent-memo').innerHTML = marked.parse(BUNDLE.phonon_docs.investment_memo);
+      document.getElementById('student-manual-markdown').innerHTML = marked.parse(BUNDLE.phonon_docs.student_manual);
+    }
+
+    function switchPhononTab(tabKey) {
+      document.querySelectorAll('.phonon-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.phonon-subtab').forEach(b => {
+        b.className = 'phonon-subtab px-3 py-1.5 rounded-xl bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition';
+      });
+
+      document.getElementById(`pcontent-${tabKey}`).classList.remove('hidden');
+      document.getElementById(`ptab-${tabKey}`).className = 'phonon-subtab px-3 py-1.5 rounded-xl bg-zinc-900 text-white transition';
+    }
+
+    // BOM Calculator Table
+    const BOM_ITEMS = [
+      { item: 'Ultrasonic Piezo Transducer', spec: '28 kHz, 50W PZT-8 Langevin Sandwich', vendor: 'DigiKey', unit: 38.50, qty: 1 },
+      { item: 'Piezo Ultrasonic Driver Board', spec: '100W 28/40 kHz Tunable Resonance Gen', vendor: 'Amazon Prime', unit: 29.80, qty: 1 },
+      { item: 'Microcontroller Dev Board', spec: 'ESP32-S3-WROOM-1 (Dual-Core 240MHz)', vendor: 'DigiKey', unit: 6.20, qty: 1 },
+      { item: 'PWM MOSFET Driver Module', spec: 'IRF520 / LR7843 High-Speed MOSFET', vendor: 'Amazon', unit: 4.45, qty: 2 },
+      { item: 'K-Type Thermocouple Amplifier', spec: 'MAX6675 Cold-Junction SPI Module', vendor: 'DigiKey', unit: 8.90, qty: 2 },
+      { item: 'DC-DC Step-Down Buck Converter', spec: 'LM2596 24V/12V to 5V 3A Regul.', vendor: 'Amazon', unit: 5.15, qty: 1 },
+      { item: '3D Printed Acoustic Clamp', spec: 'ABS High-Temp 105°C Bracket (CAD in repo)', vendor: 'Dorm Lab', unit: 4.20, qty: 1 },
+      { item: 'Thermally Conductive Acoustic Pad', spec: 'Bergquist Sil-Pad 1.5mm 6.0 W/m-K', vendor: 'DigiKey', unit: 12.48, qty: 1 },
+      { item: 'Fasteners & Copper Interface Plate', spec: 'M4 Stainless Hex Bolts + C11000 Shim', vendor: 'Hardware Store', unit: 6.90, qty: 1 },
+    ];
+
+    function initBOMTable() {
+      const tbody = document.getElementById('bom-table-body');
+      tbody.innerHTML = BOM_ITEMS.map((it, idx) => `
+        <tr class="hover:bg-zinc-50/50">
+          <td class="p-2 font-semibold text-zinc-900">${it.item}</td>
+          <td class="p-2 text-zinc-500 font-mono text-[11px]">${it.spec}</td>
+          <td class="p-2 text-zinc-600">${it.vendor}</td>
+          <td class="p-2 text-right font-mono">$${it.unit.toFixed(2)}</td>
+          <td class="p-2 text-center">
+            <input type="number" min="0" max="20" value="${it.qty}" onchange="updateBOMQty(${idx}, this.value)" class="w-12 text-center font-mono border border-zinc-200 rounded py-0.5 text-xs">
+          </td>
+          <td class="p-2 text-right font-mono font-bold text-zinc-800" id="bom-subtotal-${idx}">
+            $${(it.unit * it.qty).toFixed(2)}
+          </td>
+        </tr>
+      `).join('');
+      recalcBOMTotal();
+    }
+
+    function updateBOMQty(idx, val) {
+      const q = parseInt(val) || 0;
+      BOM_ITEMS[idx].qty = q;
+      document.getElementById(`bom-subtotal-${idx}`).textContent = `$${(BOM_ITEMS[idx].unit * q).toFixed(2)}`;
+      recalcBOMTotal();
+    }
+
+    function recalcBOMTotal() {
+      const total = BOM_ITEMS.reduce((sum, it) => sum + (it.unit * it.qty), 0);
+      document.getElementById('bom-total-display').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function initFirmwareViewer() {
+      const code = `// ============================================================================
+// PHONON DYNAMICS: ESP32-S3 ULTRASONIC RESONANCE FREERTOS DRIVER
+// Target: ESP32-S3 (Xtensa Dual-Core 240MHz) | FreeRTOS Core 0 & Core 1
+// Purpose: Ultrasonic micro-streaming boundary-layer acoustic disruption
+// ============================================================================
+
+#include <Arduino.h>
+#include <SPI.h>
+
+#define PIEZO_PWM_PIN       18
+#define LED_INDICATOR_PIN   2
+#define MAX6675_SO_PIN      19
+#define MAX6675_CS_PIN      5
+#define MAX6675_SCK_PIN     18
+
+// Ultrasonic resonance configuration (28.4 kHz center frequency)
+const uint32_t BASE_FREQUENCY_HZ = 28400;
+const uint8_t  PWM_RESOLUTION_BITS = 10;
+const uint32_t PWM_MAX_DUTY = (1 << PWM_RESOLUTION_BITS) - 1;
+
+volatile float currentGpuTemp = 65.0f;
+volatile bool acousticActive = true;
+
+// Task 1: Real-Time Acoustic PWM Frequency Sweep & Micro-Streaming Modulation
+void AcousticDriveTask(void *pvParameters) {
+    ledcSetup(0, BASE_FREQUENCY_HZ, PWM_RESOLUTION_BITS);
+    ledcAttachPin(PIEZO_PWM_PIN, 0);
+    
+    // Initial 50% duty cycle for symmetrical acoustic cavitation suppression
+    uint32_t targetDuty = PWM_MAX_DUTY / 2;
+    ledcWrite(0, targetDuty);
+
+    for (;;) {
+        // Frequency sweep +/- 400Hz every 200ms to disrupt standing acoustic nodes
+        for (int offset = -400; offset <= 400; offset += 50) {
+            ledcWriteTone(0, BASE_FREQUENCY_HZ + offset);
+            vTaskDelay(pdMS_TO_TICKS(15));
+        }
+        vTaskDelay(pdMS_TO_TICKS(50));
+    }
+}
+
+// Task 2: High-Speed Thermocouple Telemetry & Safety Cutoff (Core 1)
+void TelemetryTask(void *pvParameters) {
+    for (;;) {
+        // In production: Read SPI cold-junction compensated MAX6675
+        // Simulated reading: Dropping by 18°C within 15 seconds under micro-streaming
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
+void setup() {
+    Serial.begin(115200);
+    Serial.println("[PHONON] Initializing Sovereign Acoustic Transducer...");
+
+    xTaskCreatePinnedToCore(AcousticDriveTask, "AcousticDrive", 4096, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(TelemetryTask, "Telemetry", 2048, NULL, 2, NULL, 1);
+}
+
+void loop() {
+    vTaskDelay(pdMS_TO_TICKS(1000));
+}`;
+      document.getElementById('firmware-code-block').textContent = code;
+    }
+
+    function copyFirmwareCode() {
+      const code = document.getElementById('firmware-code-block').textContent;
+      navigator.clipboard.writeText(code);
+      showToast('Firmware C++ code copied to clipboard!');
+    }
+
+    // 6. Top 15 Blueprints
+    function initTopBlueprints() {
+      const container = document.getElementById('blueprints-list-section');
+      container.innerHTML = BUNDLE.blueprints.map(b => `
+        <div class="glass-card rounded-3xl p-5 sm:p-7 bg-white border border-zinc-200/80 hover:border-zinc-300 transition duration-200 flex flex-col justify-between shadow-luma min-w-0 overflow-hidden">
+          <div class="min-w-0">
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/70 mb-3 inline-flex items-center gap-1.5 whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Venture #${b.number}
+            </span>
+            <h4 class="font-bold text-base sm:text-lg text-zinc-950 tracking-tight leading-snug break-words">
+              ${b.title}
+            </h4>
+            <div class="mt-4 p-4 rounded-2xl bg-emerald-50/40 border border-emerald-100/70 text-xs sm:text-sm text-zinc-700 leading-relaxed min-w-0">
+              <strong class="text-emerald-950 font-semibold block text-xs uppercase tracking-wider mb-1 text-emerald-600">Executive Blueprint Thesis</strong>
+              <p class="line-clamp-3 break-words">${b.summary || b.problem}</p>
+            </div>
+          </div>
+
+          <div class="mt-5 sm:mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs sm:text-sm">
+            <button onclick="openBlueprintDetailModal(${b.number})" class="font-semibold text-emerald-700 hover:text-emerald-900 flex items-center gap-1.5 py-1 whitespace-nowrap">
+              <span>Read Full Investor Pitch</span> <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('blueprints-empire-section').innerHTML = marked.parse(BUNDLE.venture_docs.empire_blueprints);
+    }
+
+    function switchBlueprintSubView(v) {
+      const listSec = document.getElementById('blueprints-list-section');
+      const empireSec = document.getElementById('blueprints-empire-section');
+      const mvpSec = document.getElementById('blueprints-mvp-section');
+      const bList = document.getElementById('bp-btn-list');
+      const bEmpire = document.getElementById('bp-btn-empire');
+      const bMvp = document.getElementById('bp-btn-mvp');
+
+      [listSec, empireSec, mvpSec].forEach(s => s.classList.add('hidden'));
+      [bList, bEmpire, bMvp].forEach(b => b.className = 'px-3 py-1.5 rounded-xl font-semibold bg-zinc-100 text-zinc-600 hover:text-zinc-900 transition');
+
+      if (v === 'list') {
+        listSec.classList.remove('hidden');
+        bList.className = 'px-3 py-1.5 rounded-xl font-semibold bg-zinc-900 text-white transition';
+      } else if (v === 'empire') {
+        empireSec.classList.remove('hidden');
+        bEmpire.className = 'px-3 py-1.5 rounded-xl font-semibold bg-zinc-900 text-white transition';
+      } else if (v === 'mvp') {
+        mvpSec.classList.remove('hidden');
+        bMvp.className = 'px-3 py-1.5 rounded-xl font-semibold bg-zinc-900 text-white transition';
+      }
+    }
+
+    function openBlueprintDetailModal(bNum) {
+      const b = BUNDLE.blueprints.find(x => x.number === bNum);
+      if (!b) return;
+
+      const badgeContainer = document.getElementById('modal-badge-container');
+      const body = document.getElementById('modal-body');
+      const footer = document.getElementById('modal-footer');
+
+      badgeContainer.innerHTML = `
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+          Top Venture #${b.number} • Pitch Blueprint
+        </span>
+      `;
+
+      body.innerHTML = `
+        <div class="prose-luma max-w-none text-sm sm:text-base leading-relaxed space-y-4">
+          ${marked.parse(b.raw_markdown)}
+        </div>
+      `;
+
+      footer.innerHTML = `
+        <span class="text-xs text-zinc-400 font-mono hidden sm:inline">Series Seed Institutional Blueprint</span>
+        <button onclick="copyBlueprintSpec(${b.number})" class="shiny-btn px-4 py-2.5 rounded-xl text-white font-semibold transition flex items-center gap-2 text-xs sm:text-sm shadow-sm ml-auto sm:ml-0">
+          <i data-lucide="copy" class="w-4 h-4"></i> Copy Pitch Blueprint
+        </button>
+      `;
+
+      document.getElementById('detail-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function initStagingMvpViewer() {
+      document.getElementById('staging-mvp-code-block').textContent = BUNDLE.venture_docs.staging_mvp_py;
+    }
+
+    function copyStagingMvpCode() {
+      navigator.clipboard.writeText(BUNDLE.venture_docs.staging_mvp_py);
+      showToast('Staging MVP Python code copied!');
+    }
+
+    // 7. Day 1 Tweets
+    function initTweetThreads() {
+      const container = document.getElementById('tweet-cards-container');
+      const rawText = BUNDLE.root_docs.tweet_threads;
+
+      // Extract individual tweets matching ### Tweet X/7
+      const parts = rawText.split(/(?=###\s+Tweet\s+\d+)/i).filter(p => p.trim());
+      
+      container.innerHTML = parts.map((part, idx) => `
+        <div class="glass-card rounded-2xl p-4 sm:p-5 bg-white border border-zinc-200/80 min-w-0 overflow-hidden">
+          <div class="flex items-center justify-between mb-3 min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <div class="w-7 h-7 rounded-full bg-sky-50 text-sky-500 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                ${idx + 1}
+              </div>
+              <span class="text-xs font-bold text-zinc-700 font-mono truncate">Tweet ${idx + 1} / ${parts.length}</span>
+            </div>
+            <button onclick="copySingleTweet(${idx})" class="px-2.5 py-1 text-xs rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-medium transition flex items-center gap-1 flex-shrink-0">
+              <i data-lucide="copy" class="w-3 h-3"></i> Copy
+            </button>
+          </div>
+          <div class="prose-luma text-xs sm:text-sm text-zinc-800 leading-relaxed font-sans overflow-x-auto" id="tweet-body-${idx}">
+            ${marked.parse(part)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copySingleTweet(idx) {
+      const elem = document.getElementById(`tweet-body-${idx}`);
+      navigator.clipboard.writeText(elem.innerText);
+      showToast(`Tweet #${idx + 1} copied!`);
+    }
+
+    function copyFullTweetThread() {
+      navigator.clipboard.writeText(BUNDLE.root_docs.tweet_threads);
+      showToast('Full launch thread copied to clipboard!');
+    }
+
+    // 8. Scout Reports Selector
+    function initScoutReportsSelector() {
+      const sel = document.getElementById('scout-report-select');
+      const scouts = Object.entries(BUNDLE.scout_meta);
+      sel.innerHTML = scouts.map(([fn, s]) => `
+        <option value="${fn}">${s.info.agent}: ${s.info.domain}</option>
+      `).join('');
+      renderSelectedScoutReport();
+    }
+
+    function renderSelectedScoutReport() {
+      const fn = document.getElementById('scout-report-select').value;
+      const scout = BUNDLE.scout_meta[fn];
+      const box = document.getElementById('scout-report-content');
+      if (scout && scout.md_overview) {
+        box.innerHTML = marked.parse(scout.md_overview);
+      } else {
+        box.innerHTML = '<p class="text-zinc-400 italic">No markdown report available.</p>';
+      }
+    }
+
+    function renderReadmeMarkdown() {
+      document.getElementById('readme-markdown-box').innerHTML = marked.parse(BUNDLE.root_docs.readme);
+    }
+
+    function toggleElement(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('hidden');
+    }
+
+    // 9. Omni Search Engine
+    function openSearchModal() {
+      document.getElementById('search-modal').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('omni-search-input').focus();
+      }, 50);
+    }
+
+    function closeSearchModal() {
+      document.getElementById('search-modal').classList.add('hidden');
+    }
+
+    function runOmniSearch() {
+      const q = (document.getElementById('omni-search-input').value || '').toLowerCase().trim();
+      const resultsContainer = document.getElementById('omni-search-results');
+
+      if (!q) {
+        resultsContainer.innerHTML = '<div class="p-10 text-center text-sm text-zinc-400">Start typing to query all 500 papers, 53 startups, and blueprints...</div>';
+        return;
+      }
+
+      // Query papers
+      const matchPapers = BUNDLE.papers.filter(p => 
+        p.title.toLowerCase().includes(q) || 
+        p.breakthrough.toLowerCase().includes(q) ||
+        p.agent.toLowerCase().includes(q)
+      ).slice(0, 8);
+
+      // Query startups
+      const matchStartups = BUNDLE.startups.filter(s =>
+        s.title.toLowerCase().includes(q) ||
+        s.thesis.toLowerCase().includes(q)
+      ).slice(0, 5);
+
+      // Query blueprints
+      const matchBlueprints = BUNDLE.blueprints.filter(b =>
+        b.title.toLowerCase().includes(q) ||
+        (b.summary || '').toLowerCase().includes(q)
+      ).slice(0, 4);
+
+      let html = '';
+
+      if (matchPapers.length > 0) {
+        html += '<div class="text-xs font-bold text-zinc-400 uppercase tracking-wider px-2 py-1.5">Research Papers (500 Scout DB)</div>';
+        matchPapers.forEach(p => {
+          html += `
+            <div onclick="closeSearchModal(); openPaperDetailModal('${p.id}')" class="p-3.5 sm:p-4 rounded-2xl bg-zinc-50/80 hover:bg-zinc-100 border border-zinc-100 transition cursor-pointer flex items-center justify-between gap-4">
+              <div class="min-w-0 pr-2">
+                <p class="font-bold text-sm text-zinc-950 truncate">${p.title}</p>
+                <p class="text-xs text-zinc-500 truncate mt-0.5">${p.agent} • ${p.domain}</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 flex-shrink-0">
+                ${p.total_score} / 40
+              </span>
+            </div>
+          `;
+        });
+      }
+
+      if (matchStartups.length > 0) {
+        html += '<div class="text-xs font-bold text-purple-600 uppercase tracking-wider px-2 py-1.5 mt-4">100-Persona Council Startups</div>';
+        matchStartups.forEach(s => {
+          html += `
+            <div onclick="closeSearchModal(); openStartupDetailModal(${s.number})" class="p-3.5 sm:p-4 rounded-2xl bg-purple-50/40 hover:bg-purple-50/80 border border-purple-100/70 transition cursor-pointer flex items-center justify-between gap-4">
+              <div class="min-w-0 pr-2">
+                <p class="font-bold text-sm text-zinc-950 truncate">${s.title}</p>
+                <p class="text-xs text-zinc-500 truncate mt-0.5">${s.faction}</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-purple-700 bg-purple-50 px-3 py-1 rounded-full border border-purple-200 flex-shrink-0">
+                #${s.number}
+              </span>
+            </div>
+          `;
+        });
+      }
+
+      if (matchBlueprints.length > 0) {
+        html += '<div class="text-xs font-bold text-emerald-600 uppercase tracking-wider px-2 py-1.5 mt-4">Top 15 Venture Blueprints</div>';
+        matchBlueprints.forEach(b => {
+          html += `
+            <div onclick="closeSearchModal(); openBlueprintDetailModal(${b.number})" class="p-3.5 sm:p-4 rounded-2xl bg-emerald-50/40 hover:bg-emerald-50/80 border border-emerald-100/70 transition cursor-pointer flex items-center justify-between gap-4">
+              <div class="min-w-0 pr-2">
+                <p class="font-bold text-sm text-zinc-950 truncate">${b.title}</p>
+                <p class="text-xs text-zinc-500 truncate mt-0.5">${b.summary || 'Seed Stage Pitch'}</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 flex-shrink-0">
+                Venture #${b.number}
+              </span>
+            </div>
+          `;
+        });
+      }
+
+      if (!html) {
+        html = `<div class="p-10 text-center text-sm text-zinc-500">No matching papers, startups, or blueprints found for "${q}".</div>`;
+      }
+
+      resultsContainer.innerHTML = html;
+    }
+
+    // Copy utilities & Toasts
+    function downloadPapersCSV() {
+      const headers = ['ID', 'Domain', 'Agent', 'Title', 'Authors', 'Institution', 'Year', 'Venue', 'Link_DOI', 'Novelty', 'Feasibility', 'Moat', 'Commercialization', 'Total_Score', 'Viability', 'Breakthrough', 'Blue_Ocean_Thesis'];
+      const rows = BUNDLE.papers.map(p => [
+        p.id,
+        `"${(p.domain || '').replace(/"/g, '""')}"`,
+        `"${(p.agent || '').replace(/"/g, '""')}"`,
+        `"${(p.title || '').replace(/"/g, '""')}"`,
+        `"${(p.authors || '').replace(/"/g, '""')}"`,
+        `"${(p.institution || '').replace(/"/g, '""')}"`,
+        p.year || 2024,
+        `"${(p.venue || '').replace(/"/g, '""')}"`,
+        `"${(p.link || '').replace(/"/g, '""')}"`,
+        p.novelty_score,
+        p.feasibility_score,
+        p.moat_score,
+        p.commercialization_score,
+        p.total_score,
+        `"${(p.viability || '').replace(/"/g, '""')}"`,
+        `"${(p.breakthrough || '').replace(/"/g, '""')}"`,
+        `"${(p.blue_ocean_thesis || '').replace(/"/g, '""')}"`
+      ]);
+      const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '500_blue_ocean_research_papers.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Downloaded 500_blue_ocean_research_papers.csv!');
+    }
+
+    function copyPaperCitation(paperId) {
+      const p = BUNDLE.papers.find(x => x.id === paperId);
+      if (!p) return;
+      const citation = `${p.authors} (${p.year || 2024}). "${p.title}". ${p.venue ? `${p.venue}. ` : ''}${p.link}`;
+      navigator.clipboard.writeText(citation);
+      showToast('Paper citation copied!');
+    }
+
+    function copyStartupSpec(num) {
+      const s = BUNDLE.startups.find(x => x.number === num);
+      if (!s) return;
+      navigator.clipboard.writeText(s.raw_markdown);
+      showToast(`Startup #${num} spec copied!`);
+    }
+
+    function copyBlueprintSpec(num) {
+      const b = BUNDLE.blueprints.find(x => x.number === num);
+      if (!b) return;
+      navigator.clipboard.writeText(b.raw_markdown);
+      showToast(`Venture Blueprint #${num} copied!`);
+    }
+
+    function copyCurrentShareLink() {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('Page link copied to clipboard!');
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'glass-card bg-zinc-900 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 border border-zinc-700 animate-bounce duration-300';
+      toast.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
